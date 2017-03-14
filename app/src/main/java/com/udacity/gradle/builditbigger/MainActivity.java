@@ -1,6 +1,7 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Pair;
@@ -8,14 +9,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.udacity.gradle.jokedisplay.JokeActivity;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Todd"));
     }
 
 
@@ -42,15 +44,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Todd"));
+        //Source: http://stackoverflow.com/questions/12575068/how-to-get-the-result-of-onpostexecute-to-main-activity-because-asynctask-is-a
+
+        EndpointsAsyncTask asyncTask = new EndpointsAsyncTask();
+        asyncTask.delegate = this;
+        asyncTask.execute(new Pair<Context, String>(this, ""));
     }
 
-
-
-//    Intent intent = new Intent(this, JokeActivity.class);
-//    JokeSource jokeSource = new JokeSource();
-//    String joke = jokeSource.getJoke();
-//        intent.putExtra(JokeActivity.JOKE_KEY, joke);
-//    startActivity(intent);
-
+    @Override
+    public void processFinish(String output) {
+        Intent intent = new Intent(this, JokeActivity.class);
+        intent.putExtra(JokeActivity.JOKE_KEY, output);
+        startActivity(intent);
+    }
 }
