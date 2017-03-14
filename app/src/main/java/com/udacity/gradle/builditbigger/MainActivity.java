@@ -8,16 +8,22 @@ import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.udacity.gradle.jokedisplay.JokeActivity;
 
 
 public class MainActivity extends AppCompatActivity implements AsyncResponse {
 
+    private ProgressBar spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        spinner = (ProgressBar) findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
     }
 
 
@@ -49,12 +55,14 @@ public class MainActivity extends AppCompatActivity implements AsyncResponse {
         EndpointsAsyncTask asyncTask = new EndpointsAsyncTask();
         asyncTask.delegate = this;
         asyncTask.execute(new Pair<Context, String>(this, ""));
+        spinner.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void processFinish(String output) {
         Intent intent = new Intent(this, JokeActivity.class);
         intent.putExtra(JokeActivity.JOKE_KEY, output);
+        spinner.setVisibility(View.GONE);
         startActivity(intent);
     }
 }
