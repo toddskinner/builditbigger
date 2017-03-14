@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"ODRTh3xaRR64wpeXJSlF33HMN-0/fti4tQf86KipaFePFOqBix6i89c\"",
+ "etag": "\"ODRTh3xaRR64wpeXJSlF33HMN-0/tzuGzBkq67MNrepYv0ex17ocVa0\"",
  "discoveryVersion": "v1",
  "id": "myApi:v1",
  "name": "myApi",
@@ -13,8 +13,8 @@
   "x32": "https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png"
  },
  "protocol": "rpc",
- "rootUrl": "https://myApplicationId.appspot.com/_ah/api/",
- "rpcUrl": "https://myApplicationId.appspot.com/_ah/api/rpc",
+ "rootUrl": "https://builditbigger-161420.appspot.com/_ah/api/",
+ "rpcUrl": "https://builditbigger-161420.appspot.com/_ah/api/rpc",
  "rpcPath": "/_ah/api/rpc",
  "parameters": {
   "alt": {
@@ -82,17 +82,9 @@
   }
  },
  "methods": {
-  "myApi.sayHi": {
-   "id": "myApi.sayHi",
-   "parameters": {
-    "name": {
-     "type": "string",
-     "required": true
-    }
-   },
-   "parameterOrder": [
-    "name"
-   ],
+  "myApi.getJokes": {
+   "id": "myApi.getJokes",
+   "allowGet": true,
    "returns": {
     "$ref": "MyBean"
    },
