@@ -24,7 +24,7 @@ import com.udacity.gradle.jokesource.JokeSource;
         )
 )
 public class MyEndpoint {
-    
+
     @ApiMethod(name = "getJokes")
     public MyBean getJokes() {
         String joke = JokeSource.getJoke();
